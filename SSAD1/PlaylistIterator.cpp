@@ -1,34 +1,35 @@
 #include "PlaylistIterator.h"
+#include "Playlist.h"
+#include "PlaylistIteratorImpl.h"
 
-
-PlaylistIterator::PlaylistIterator()
-{
-}
-
-
-PlaylistIterator::PlaylistIterator(PlaylistIteratorlmpl impl)
+PlaylistIterator::PlaylistIterator(Playlist& playlist, PlaylistIteratorImpl* impl)
+: playlist(&playlist), impl(impl), track(impl->Next())
 {
 }
 
 PlaylistIterator::~PlaylistIterator()
 {
+	delete impl;
 }
 
-Track PlaylistIterator::Get()
+Track& PlaylistIterator::Get()
 {
-	return Track();
+	return track;
 }
 
-PlaylistIterator PlaylistIterator::Next()
+PlaylistIterator& PlaylistIterator::Next()
 {
-	return PlaylistIterator();
+	track = impl->Next();
+	return *this;
 }
 
-PlaylistIterator PlaylistIterator::Prev()
+PlaylistIterator& PlaylistIterator::Prev()
 {
-	return PlaylistIterator();
+	track = impl->Prev();
+	return *this;
 }
 
-void PlaylistIterator::Setlmpl(PlaylistIteratorlmpl lmpl)
+void PlaylistIterator::SetImpl(PlaylistIteratorImpl *i)
 {
+	impl = i;
 }

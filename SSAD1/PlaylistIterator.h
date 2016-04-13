@@ -1,17 +1,22 @@
 #pragma once
-#include "PlaylistIteratorlmpl.h"
+#include "PlaylistIteratorImpl.h"
 #include "Track.h"
+class Playlist;
 
 class PlaylistIterator
 {
 public:
-	PlaylistIterator(PlaylistIteratorlmpl impl);
-	PlaylistIterator();
+	PlaylistIterator(PlaylistIteratorImpl* impl);
+	PlaylistIterator(Playlist& playlist, PlaylistIteratorImpl* impl);
 	~PlaylistIterator();
 
-	Track Get();
-	PlaylistIterator Next();
-	PlaylistIterator Prev();
-	void Setlmpl(PlaylistIteratorlmpl lmpl);
-};
+	Track& Get();
+	PlaylistIterator& Next();
+	PlaylistIterator& Prev();
+	void SetImpl(PlaylistIteratorImpl* i);
 
+private:
+	Playlist* playlist;
+	PlaylistIteratorImpl* impl;
+	Track& track;
+};
