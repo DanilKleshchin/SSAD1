@@ -5,9 +5,10 @@ class Track :
 	public Playable
 {
 public:
-	Track();
+	Track(const std::string& path);
 	virtual ~Track();
-private:
+
+	bool isFinite() { return true; }
 	std::string filename;
 };
 

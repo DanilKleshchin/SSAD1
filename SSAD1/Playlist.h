@@ -8,8 +8,10 @@ public:
 	Playlist();
 	~Playlist();
 
-	TrackList GetContent();
-	void SetContent(TrackList content);
+	TrackList& GetContent();
+	void SetContent(TrackList& content);
 	PlaylistIterator Iterate();
-};
 
+private:
+	TrackList content;
+};

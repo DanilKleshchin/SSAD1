@@ -2,7 +2,7 @@
 
 
 
-Track::Track()
+Track::Track(const std::string& path) : filename(path)
 {
 }
 

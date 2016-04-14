@@ -1,4 +1,5 @@
 #include "Playlist.h"
+#include "PlaylistIteratorPlainImpl.h"
 
 
 
@@ -11,16 +12,17 @@ Playlist::~Playlist()
 {
 }
 
-TrackList Playlist::GetContent()
+TrackList& Playlist::GetContent()
 {
-	return TrackList();
+	return content;
 }
 
-void Playlist::SetContent(TrackList content)
+void Playlist::SetContent(TrackList& c)
 {
+	content = c;
 }
 
 PlaylistIterator Playlist::Iterate()
 {
-	return PlaylistIterator();
+	return PlaylistIterator(*this, new PlaylistIteratorPlainImpl(GetContent()));
 }
