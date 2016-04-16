@@ -7,8 +7,8 @@ class PlaylistIteratorPlainImpl :
 	public PlaylistIteratorImpl
 {
 public:
-	PlaylistIteratorPlainImpl(PlaylistIteratorImpl*);
-	PlaylistIteratorPlainImpl(TrackList&);
+	PlaylistIteratorPlainImpl();
+	PlaylistIteratorPlainImpl(TrackList& t);
 	virtual ~PlaylistIteratorPlainImpl();
 
 	Track& Next();

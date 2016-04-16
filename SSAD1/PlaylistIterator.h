@@ -18,5 +18,5 @@ public:
 private:
 	Playlist* playlist;
 	PlaylistIteratorImpl* impl;
-	Track& track;
+	Track* track;
 };

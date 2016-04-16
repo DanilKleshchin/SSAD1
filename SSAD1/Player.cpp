@@ -1,9 +1,11 @@
 #include "Player.h"
 #include "PlaylistIteratorPlainImpl.h"
+#include "PlaylistIteratorShuffleImpl.h"
 
 Player::Player(Playlist& playlist)
 : playlist(playlist), playlistIterator(playlist, new PlaylistIteratorPlainImpl(playlist.GetContent()))
 {
+	music.openFromFile(((Track) playlistIterator.Get()).filename);
 }
 
 Player::~Player()
@@ -22,12 +24,22 @@ void Player::Pause()
 
 void Player::Next()
 {
-	music.openFromFile(((Track) playlistIterator.Next().Get()).filename);
+	sf::Music::Status s = music.getStatus();
+	music.openFromFile(((Track)playlistIterator.Next().Get()).filename);
+	if (s == sf::Music::Status::Playing)
+	{
+		music.play();
+	}
 }
 
 void Player::Prev()
 {
-	music.openFromFile(((Track) playlistIterator.Prev().Get()).filename);
+	sf::Music::Status s = music.getStatus();
+	music.openFromFile(((Track)playlistIterator.Prev().Get()).filename);
+	if (s == sf::Music::Status::Playing)
+	{
+		music.play();
+	}
 }
 
 void Player::Stop()
@@ -37,5 +49,8 @@ void Player::Stop()
 
 void Player::SetShuffle(bool shuffle)
 {
-	/// TODO
+	playlistIterator.SetImpl(shuffle
+		? (PlaylistIteratorImpl*) new PlaylistIteratorShuffleImpl()
+		: (PlaylistIteratorImpl*) new PlaylistIteratorPlainImpl()
+		);
 }

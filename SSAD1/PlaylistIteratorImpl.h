@@ -7,12 +7,14 @@
 class PlaylistIteratorImpl
 {
 public:
-	PlaylistIteratorImpl(TrackListPosition& p);
-	PlaylistIteratorImpl(std::stack<TrackListPosition> s);
+	PlaylistIteratorImpl();
+	PlaylistIteratorImpl(TrackList& t);
 	virtual ~PlaylistIteratorImpl();
 
 	virtual Track& Next() = 0;
 	virtual Track& Prev() = 0;
+	void InitStack(TrackList& t);
+	void InitStack(std::stack<TrackListPosition>& s);
 
 	std::stack<TrackListPosition> stack;
 	

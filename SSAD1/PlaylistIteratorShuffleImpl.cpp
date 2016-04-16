@@ -2,16 +2,13 @@
 
 std::random_device PlaylistIteratorShuffleImpl::rdev;
 
-PlaylistIteratorShuffleImpl::PlaylistIteratorShuffleImpl(PlaylistIteratorImpl* impl)
-: PlaylistIteratorImpl(impl->stack), randomize(0, stack.top().tracklist->GetContent().size() - 1)
+PlaylistIteratorShuffleImpl::PlaylistIteratorShuffleImpl()
 {
-	delete impl;
 }
 
-PlaylistIteratorShuffleImpl::PlaylistIteratorShuffleImpl(TrackList& list)
-: PlaylistIteratorImpl(TrackListPosition(&list, 0)), randomize(0, stack.top().tracklist->GetContent().size() - 1)
+PlaylistIteratorShuffleImpl::PlaylistIteratorShuffleImpl(TrackList& t)
+: PlaylistIteratorImpl(t)
 {
-	stack.top().position = randomize(rdev);
 }
 
 PlaylistIteratorShuffleImpl::~PlaylistIteratorShuffleImpl()
@@ -22,7 +19,7 @@ Track& PlaylistIteratorShuffleImpl::Next()
 {
 	Playable* p;
 	do {
-		stack.top().position = randomize(rdev);
+		stack.top().position = randomize(rdev) % stack.top().tracklist->GetContent().size();
 		p = stack.top().tracklist->GetContent()[stack.top().position];
 		if (!p->isFinite()) {
 			stack.push(TrackListPosition((TrackList*) p, 0));

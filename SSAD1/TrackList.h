@@ -11,8 +11,10 @@ public:
 
 	void Append(Playable *playable);
 	const std::vector<Playable*> GetContent();
-	bool isFinite() { return false; }
+	std::string getName() const { return name; };
+	bool isFinite() const { return false; }
 private:
+	std::string name;
 	std::vector<Playable*> list;
 };
 

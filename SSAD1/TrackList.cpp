@@ -9,6 +9,7 @@ TrackList::TrackList(const char* path)
 {
 	namespace fs = boost::filesystem;
 	fs::path dir(path);
+	name = dir.filename().string();
 	if (fs::is_directory(dir)) {
 		fs::directory_iterator end_iter;
 		for (fs::directory_iterator dir_iter(dir) ; dir_iter != end_iter ; ++dir_iter)
