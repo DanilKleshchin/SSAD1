@@ -9,6 +9,6 @@ public:
 	~TrackListPosition();
 
 	TrackList* tracklist;
-	std::size_t position;
+	int position;
 };
 

@@ -7,8 +7,8 @@ class PlaylistIteratorShuffleImpl :
 	public PlaylistIteratorImpl
 {
 public:
-	PlaylistIteratorShuffleImpl(PlaylistIteratorImpl*);
-	PlaylistIteratorShuffleImpl(TrackList&);
+	PlaylistIteratorShuffleImpl();
+	PlaylistIteratorShuffleImpl(TrackList& t);
 	virtual ~PlaylistIteratorShuffleImpl();
 
 	Track& Next();

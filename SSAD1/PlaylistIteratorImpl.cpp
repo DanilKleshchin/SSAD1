@@ -1,17 +1,24 @@
 #include "PlaylistIteratorImpl.h"
 
-
-
-PlaylistIteratorImpl::PlaylistIteratorImpl(TrackListPosition& p)
+PlaylistIteratorImpl::PlaylistIteratorImpl()
 {
-	stack.push(p);
 }
 
-PlaylistIteratorImpl::PlaylistIteratorImpl(std::stack<TrackListPosition> s)
-: stack(s)
+PlaylistIteratorImpl::PlaylistIteratorImpl(TrackList& t)
 {
+	InitStack(t);
 }
 
 PlaylistIteratorImpl::~PlaylistIteratorImpl()
 {
+}
+
+void PlaylistIteratorImpl::InitStack(std::stack<TrackListPosition>& s)
+{
+	stack = s;
+}
+
+void PlaylistIteratorImpl::InitStack(TrackList& t)
+{
+	stack.push(TrackListPosition(&t, -1));
 }
