@@ -56,7 +56,7 @@ void PlayerCLI::Run()
 		}
 		else
 		{
-			std::cout << "Unknown command; ignored." << endl;
+			std::cout << "Unknown command; ignored." << std::endl;
 		}
 	}
 }
